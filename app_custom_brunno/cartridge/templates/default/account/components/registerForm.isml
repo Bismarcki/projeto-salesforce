@@ -81,6 +81,10 @@
             type="text"
             class="form-control"
             id="registration-form-CPFbrunno"
+            placeholder="Ex. 000.000.000-00"
+            autocomplete="off"
+            onkeyup="mascara_cpf()"
+            pattern="(\d{3}.?\d{3}.?\d{3}-?\d{2})"
             data-missing-error="${Resource.msg('error.message.required','forms',null)}"
             data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
             aria-describedby="form-CPFbrunno-error"
@@ -260,6 +264,18 @@
         </a>
     </div>
 </form>
+
+<script>
+    function mascara_cpf(){
+        var cpf = document.getElementById('registration-form-CPFbrunno')
+        if(cpf.value.length == 3 || cpf.value.length == 7){
+            cpf.value += "."
+        }else if(cpf.value.length == 11){
+            cpf.value += "-"
+        }
+    }
+</script>
+
 <script>
     'use strict';
 
@@ -269,13 +285,23 @@
         document.getElementById('registration-form-StreetBrunno').value = endereco.logradouro;
     }
 
+    const cepValido = (cep) => cep.length == 8 && /^[0-9]+$/.test(cep);
+
     const pesquisarCep = async () => {
         const cep = document.getElementById('registration-form-CEPbrunno').value;
         const url = "https://viacep.com.br/ws/"+cep+"/json/";
-        const dados = await fetch(url);
-        const endereco = await dados.json();
-        preencherFormulario(endereco);
+        if(cepValido(cep)){
 
+            const dados = await fetch(url);
+            const endereco = await dados.json();
+            if(endereco.hasOwnProperty('erro')){
+                document.getElementById('registration-form-CEPbrunno').value = 'CEP não encontrado!';
+            }else{
+                preencherFormulario(endereco);
+            }
+        }else{
+            document.getElementById('registration-form-CEPbrunno').value = 'CEP Incorreto!';
+        }
     }
 
     document.getElementById('registration-form-CEPbrunno').addEventListener('focusout', pesquisarCep);
