@@ -20,6 +20,7 @@ function getProfile(profile) {
         result = {
             firstName: profile.firstName,
             lastName: profile.lastName,
+            gender: profile.gender,
             CPFbrunno: profileCustom.custom.CPFbrunno,
             CEPbrunno: profileCustom.custom.CEPbrunno,
             Statebrunno: profileCustom.custom.Statebrunno,

@@ -51,13 +51,12 @@
         <div class="invalid-feedback" id="form-birthday-error"></div>
     </div>
 
-<div class="form-group
+    <div class="form-group
         <isif condition="${!!pdict.profileForm.customer.gender.mandatory === true}">required</isif>">
         <label class="form-control-label" for="registration-form-gender">
             <isprint value="${pdict.profileForm.customer.gender.label}" encoding="htmlcontent"/>
         </label>
         <select
-            type="text"
             class="form-control"
             id="registration-form-gender"
             data-missing-error="${Resource.msg('error.message.required','forms',null)}"
@@ -65,9 +64,9 @@
             aria-describedby="form-gender-error"
             placeholder="Gender"
             <isprint value=${pdict.profileForm.customer.gender.attributes} encoding="off" />>
-            <option value=1>Male</option>
-            <option value=2>Female</option>
-            <option value=3>Other</option>
+            <option value="0">Undefined</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
         </select>
         <div class="invalid-feedback" id="form-gender-error"></div>
     </div>
@@ -101,8 +100,9 @@
             type="text"
             class="form-control"
             id="registration-form-CEPbrunno"
+            placeholder="Ex. 00000000"
             data-missing-error="${Resource.msg('error.message.required','forms',null)}"
-            data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+            data-range-error="${Resource.msg('error.message.8orless','forms',null)}"
             aria-describedby="form-CEPbrunno-error"
             <isprint value=${pdict.profileForm.customer.CEPbrunno.attributes} encoding="off" />>
         <div class="invalid-feedback" id="form-CEPbrunno-error"></div>
@@ -118,7 +118,7 @@
             class="form-control"
             id="registration-form-Statebrunno"
             data-missing-error="${Resource.msg('error.message.required','forms',null)}"
-            data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+            data-range-error="${Resource.msg('error.message.50orless','forms',null)}"
             aria-describedby="form-Statebrunno-error"
             <isprint value=${pdict.profileForm.customer.Statebrunno.attributes} encoding="off" />>
         <div class="invalid-feedback" id="form-Statebrunno-error"></div>
@@ -134,7 +134,7 @@
             class="form-control"
             id="registration-form-CityBrunno"
             data-missing-error="${Resource.msg('error.message.required','forms',null)}"
-            data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+            data-range-error="${Resource.msg('error.message.50orless','forms',null)}"
             aria-describedby="form-CityBrunno-error"
             <isprint value=${pdict.profileForm.customer.CityBrunno.attributes} encoding="off" />>
         <div class="invalid-feedback" id="form-CityBrunno-error"></div>
@@ -150,7 +150,7 @@
         class="form-control"
         id="registration-form-StreetBrunno"
         data-missing-error="${Resource.msg('error.message.required','forms',null)}"
-        data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+        data-range-error="${Resource.msg('error.message.50orless','forms',null)}"
         aria-describedby="form-StreetBrunno-error"
         <isprint value=${pdict.profileForm.customer.StreetBrunno.attributes} encoding="off" />>
     <div class="invalid-feedback" id="form-StreetBrunno-error"></div>
@@ -165,6 +165,7 @@
             type="tel"
             class="form-control"
             id="registration-form-phone"
+            pattern="^([0-9]{2})[``][9]([0-9]{4})[-]([0-9]{4})$"
             data-missing-error="${Resource.msg('error.message.required','forms',null)}"
             data-pattern-mismatch="${Resource.msg('error.message.parse.phone.profile.form','forms',null)}"
             data-range-error="${Resource.msg('error.message.50orless','forms',null)}"
@@ -278,31 +279,37 @@
 
 <script>
     'use strict';
-
+    
+    const limparFormulario = (endereco) => {
+        document.getElementById('registration-form-Statebrunno').value = "";
+        document.getElementById('registration-form-CityBrunno').value = "";
+        document.getElementById('registration-form-StreetBrunno').value = "";
+    }
+    
     const preencherFormulario = (endereco) => {
         document.getElementById('registration-form-Statebrunno').value = endereco.uf;
         document.getElementById('registration-form-CityBrunno').value = endereco.localidade;
         document.getElementById('registration-form-StreetBrunno').value = endereco.logradouro;
     }
-
-    const cepValido = (cep) => cep.length == 8 && /^[0-9]+$/.test(cep);
-
+    const eNumber = (numero) => /^[0-9]+$/.test(numero)
+    const cepValido = (cep) => cep.length == 8 && eNumber(cep);
+    
     const pesquisarCep = async () => {
+        limparFormulario();
         const cep = document.getElementById('registration-form-CEPbrunno').value;
         const url = "https://viacep.com.br/ws/"+cep+"/json/";
         if(cepValido(cep)){
-
             const dados = await fetch(url);
             const endereco = await dados.json();
             if(endereco.hasOwnProperty('erro')){
-                document.getElementById('registration-form-CEPbrunno').value = 'CEP não encontrado!';
+                document.getElementById('registration-form-Statebrunno').value = 'CEP não encontrado!';
             }else{
                 preencherFormulario(endereco);
             }
         }else{
-            document.getElementById('registration-form-CEPbrunno').value = 'CEP Incorreto!';
+            document.getElementById('registration-form-Statebrunno').value = 'CEP Incorreto!';
         }
     }
-
+    
     document.getElementById('registration-form-CEPbrunno').addEventListener('focusout', pesquisarCep);
-</script>
+    </script>

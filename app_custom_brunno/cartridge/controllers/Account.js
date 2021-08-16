@@ -216,6 +216,7 @@ server.post(
         var registrationFormObj = {
             firstName: registrationForm.customer.firstname.value,
             lastName: registrationForm.customer.lastname.value,
+            gender: registrationForm.customer.gender.value,
             CPFbrunno: registrationForm.customer.CPFbrunno.value,
             CEPbrunno: registrationForm.customer.CEPbrunno.value,
             Statebrunno: registrationForm.customer.Statebrunno.value,
@@ -269,6 +270,7 @@ server.post(
 
                                 newCustomerProfile.firstName = registrationForm.firstName;
                                 newCustomerProfile.lastName = registrationForm.lastName;
+                                newCustomerProfile.gender = registrationForm.gender;
                                 newCustomerProfile.custom.CPFbrunno = registrationForm.CPFbrunno;
                                 newCustomerProfile.custom.CEPbrunno = registrationForm.CEPbrunno;
                                 newCustomerProfile.custom.Statebrunno = registrationForm.Statebrunno;

@@ -30,12 +30,11 @@
 
 		<field 
 			formid="gender" 
-			label="label.input.gender.profile" 
+			label="label.select.gender.profile" 
 			mandatory="true"
-			max-length="14"
 			missing-error="error.message.required" 
 			range-error="error.message.14orless" 
-			type="string" />
+			type="integer" />
 
 		<field 
 			formid="CPFbrunno" 
@@ -50,9 +49,9 @@
 			formid="CEPbrunno" 
 			label="label.input.CEPbrunno.profile" 
 			mandatory="true"
-			max-length="50"
+			max-length="8"
 			missing-error="error.message.required" 
-			range-error="error.message.50orless" 
+			range-error="error.message.8orless" 
 			type="string" />
 
 		<field 
@@ -112,7 +111,6 @@
 			formid="phone"
 			label="label.input.phone.profile"
 			mandatory="true"
-			regexp="^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$"
 			missing-error="error.message.required"
 			parse-error="error.message.parse.phone.profile.form"
 			type="string"/> 
