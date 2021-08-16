@@ -88,6 +88,22 @@
         <div class="invalid-feedback" id="form-CPFbrunno-error"></div>
     </div>
 
+        <div class="form-group
+        <isif condition="${!!pdict.profileForm.customer.CEPbrunno.mandatory === true}">required</isif>">
+        <label class="form-control-label" for="registration-form-CEPbrunno">
+            <isprint value="${pdict.profileForm.customer.CEPbrunno.label}" encoding="htmlcontent" />
+        </label>
+        <input
+            type="text"
+            class="form-control"
+            id="registration-form-CEPbrunno"
+            data-missing-error="${Resource.msg('error.message.required','forms',null)}"
+            data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+            aria-describedby="form-CEPbrunno-error"
+            <isprint value=${pdict.profileForm.customer.CEPbrunno.attributes} encoding="off" />>
+        <div class="invalid-feedback" id="form-CEPbrunno-error"></div>
+    </div>
+
     <div class="form-group
         <isif condition="${!!pdict.profileForm.customer.phone.mandatory === true}">required</isif>">
         <label class="form-control-label" for="registration-form-phone">
