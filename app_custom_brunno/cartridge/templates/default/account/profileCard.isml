@@ -19,6 +19,22 @@
             <dd>${pdict.account.profile.CPFbrunno}</dd>
         </dl>
         <dl>
+            <dt>${Resource.msg('label.profile.CEPbrunno','account',null)}</dt>
+            <dd>${pdict.account.profile.CEPbrunno}</dd>
+        </dl>
+        <dl>
+            <dt>${Resource.msg('label.profile.Statebrunno','account',null)}</dt>
+            <dd>${pdict.account.profile.Statebrunno}</dd>
+        </dl>
+        <dl>
+            <dt>${Resource.msg('label.profile.CityBrunno','account',null)}</dt>
+            <dd>${pdict.account.profile.CityBrunno}</dd>
+        </dl>
+        <dl>
+            <dt>${Resource.msg('label.profile.StreetBrunno','account',null)}</dt>
+            <dd>${pdict.account.profile.StreetBrunno}</dd>
+        </dl>
+        <dl>
             <dt>${Resource.msg('label.profile.email','account',null)}</dt>
             <dd>${pdict.account.profile.email}</dd>
         </dl>

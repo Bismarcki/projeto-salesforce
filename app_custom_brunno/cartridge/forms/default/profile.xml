@@ -20,12 +20,66 @@
 			type="string" />
 
 		<field 
+			formid="birthday" 
+			label="label.input.birthday.profile" 
+			mandatory="true"
+			max-length="14"
+			missing-error="error.message.required" 
+			range-error="error.message.14orless" 
+			type="string" />
+
+		<field 
+			formid="gender" 
+			label="label.input.gender.profile" 
+			mandatory="true"
+			max-length="14"
+			missing-error="error.message.required" 
+			range-error="error.message.14orless" 
+			type="string" />
+
+		<field 
 			formid="CPFbrunno" 
 			label="label.input.CPFbrunno.profile" 
 			mandatory="true"
 			max-length="14"
 			missing-error="error.message.required" 
 			range-error="error.message.14orless" 
+			type="string" />
+
+		<field 
+			formid="CEPbrunno" 
+			label="label.input.CEPbrunno.profile" 
+			mandatory="true"
+			max-length="50"
+			missing-error="error.message.required" 
+			range-error="error.message.50orless" 
+			type="string" />
+
+		<field 
+			formid="Statebrunno" 
+			label="label.input.Statebrunno.profile" 
+			mandatory="true"
+			max-length="50"
+			missing-error="error.message.required" 
+			range-error="error.message.50orless" 
+			type="string" />
+
+		<field 
+			formid="CityBrunno" 
+			label="label.input.CityBrunno.profile" 
+			mandatory="true"
+			max-length="50"
+			missing-error="error.message.required" 
+			range-error="error.message.50orless" 
+			type="string" />
+
+		<field 
+			formid="StreetBrunno" 
+			label="label.input.StreetBrunno.profile" 
+			mandatory="true"
+			max-length="50"
+			missing-error="error.message.required" 
+			range-error="error.message.50orless" 
 			type="string" />
 
 		<field

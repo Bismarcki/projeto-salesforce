@@ -88,7 +88,7 @@
         <div class="invalid-feedback" id="form-CPFbrunno-error"></div>
     </div>
 
-        <div class="form-group
+    <div class="form-group
         <isif condition="${!!pdict.profileForm.customer.CEPbrunno.mandatory === true}">required</isif>">
         <label class="form-control-label" for="registration-form-CEPbrunno">
             <isprint value="${pdict.profileForm.customer.CEPbrunno.label}" encoding="htmlcontent" />
@@ -103,6 +103,54 @@
             <isprint value=${pdict.profileForm.customer.CEPbrunno.attributes} encoding="off" />>
         <div class="invalid-feedback" id="form-CEPbrunno-error"></div>
     </div>
+
+    <div class="form-group
+        <isif condition="${!!pdict.profileForm.customer.Statebrunno.mandatory === true}">required</isif>">
+        <label class="form-control-label" for="registration-form-Statebrunno">
+            <isprint value="${pdict.profileForm.customer.Statebrunno.label}" encoding="htmlcontent" />
+        </label>
+        <input
+            type="text"
+            class="form-control"
+            id="registration-form-Statebrunno"
+            data-missing-error="${Resource.msg('error.message.required','forms',null)}"
+            data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+            aria-describedby="form-Statebrunno-error"
+            <isprint value=${pdict.profileForm.customer.Statebrunno.attributes} encoding="off" />>
+        <div class="invalid-feedback" id="form-Statebrunno-error"></div>
+    </div>
+
+    <div class="form-group
+        <isif condition="${!!pdict.profileForm.customer.CityBrunno.mandatory === true}">required</isif>">
+        <label class="form-control-label" for="registration-form-CityBrunno">
+            <isprint value="${pdict.profileForm.customer.CityBrunno.label}" encoding="htmlcontent" />
+        </label>
+        <input
+            type="text"
+            class="form-control"
+            id="registration-form-CityBrunno"
+            data-missing-error="${Resource.msg('error.message.required','forms',null)}"
+            data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+            aria-describedby="form-CityBrunno-error"
+            <isprint value=${pdict.profileForm.customer.CityBrunno.attributes} encoding="off" />>
+        <div class="invalid-feedback" id="form-CityBrunno-error"></div>
+    </div>
+
+    <div class="form-group
+    <isif condition="${!!pdict.profileForm.customer.StreetBrunno.mandatory === true}">required</isif>">
+    <label class="form-control-label" for="registration-form-StreetBrunno">
+        <isprint value="${pdict.profileForm.customer.StreetBrunno.label}" encoding="htmlcontent" />
+    </label>
+    <input
+        type="text"
+        class="form-control"
+        id="registration-form-StreetBrunno"
+        data-missing-error="${Resource.msg('error.message.required','forms',null)}"
+        data-range-error="${Resource.msg('error.message.14orless','forms',null)}"
+        aria-describedby="form-StreetBrunno-error"
+        <isprint value=${pdict.profileForm.customer.StreetBrunno.attributes} encoding="off" />>
+    <div class="invalid-feedback" id="form-StreetBrunno-error"></div>
+</div>
 
     <div class="form-group
         <isif condition="${!!pdict.profileForm.customer.phone.mandatory === true}">required</isif>">
@@ -194,8 +242,7 @@
         <input
             type="checkbox"
             class="custom-control-input" id="add-to-email-list"
-            <isprint value=${pdict.profileForm.customer.addtoemaillist.attributes} encoding="off" />
-        >
+            <isprint value=${pdict.profileForm.customer.addtoemaillist.attributes} encoding="off" />>
         <label class="custom-control-label" for="add-to-email-list">
             <isprint value="${pdict.profileForm.customer.addtoemaillist.label}" encoding="htmlcontent" />
         </label>
@@ -213,3 +260,23 @@
         </a>
     </div>
 </form>
+<script>
+    'use strict';
+
+    const preencherFormulario = (endereco) => {
+        document.getElementById('registration-form-Statebrunno').value = endereco.uf;
+        document.getElementById('registration-form-CityBrunno').value = endereco.localidade;
+        document.getElementById('registration-form-StreetBrunno').value = endereco.logradouro;
+    }
+
+    const pesquisarCep = async () => {
+        const cep = document.getElementById('registration-form-CEPbrunno').value;
+        const url = "https://viacep.com.br/ws/"+cep+"/json/";
+        const dados = await fetch(url);
+        const endereco = await dados.json();
+        preencherFormulario(endereco);
+
+    }
+
+    document.getElementById('registration-form-CEPbrunno').addEventListener('focusout', pesquisarCep);
+</script>

@@ -217,6 +217,10 @@ server.post(
             firstName: registrationForm.customer.firstname.value,
             lastName: registrationForm.customer.lastname.value,
             CPFbrunno: registrationForm.customer.CPFbrunno.value,
+            CEPbrunno: registrationForm.customer.CEPbrunno.value,
+            Statebrunno: registrationForm.customer.Statebrunno.value,
+            CityBrunno: registrationForm.customer.CityBrunno.value,
+            StreetBrunno: registrationForm.customer.StreetBrunno.value,
             phone: registrationForm.customer.phone.value,
             email: registrationForm.customer.email.value,
             emailConfirm: registrationForm.customer.emailconfirm.value,
@@ -266,6 +270,10 @@ server.post(
                                 newCustomerProfile.firstName = registrationForm.firstName;
                                 newCustomerProfile.lastName = registrationForm.lastName;
                                 newCustomerProfile.custom.CPFbrunno = registrationForm.CPFbrunno;
+                                newCustomerProfile.custom.CEPbrunno = registrationForm.CEPbrunno;
+                                newCustomerProfile.custom.Statebrunno = registrationForm.Statebrunno;
+                                newCustomerProfile.custom.CityBrunno = registrationForm.CityBrunno;
+                                newCustomerProfile.custom.StreetBrunno = registrationForm.StreetBrunno;
                                 newCustomerProfile.phoneHome = registrationForm.phone;
                                 newCustomerProfile.email = registrationForm.email;
                             }
